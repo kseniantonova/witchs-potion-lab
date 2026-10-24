@@ -1,0 +1,139 @@
+/* Compact progress retained on results. All scene styling below is for rounds. */
+main{min-height:100dvh}
+.potion-steps{height:64px;padding:0;gap:clamp(20px,4vw,54px);border:0;align-items:center}
+.potion-steps .step{width:74px;display:flex;flex-direction:column;justify-content:center;gap:2px;opacity:1;letter-spacing:0}
+.potion-steps .step>.step-label{display:block;width:auto;height:auto;line-height:15px;border:0;border-radius:0;font-size:11px;letter-spacing:.3px;color:#e3d4bf;background:none}
+.step-cauldron{width:49px;height:44px;overflow:visible}
+.step .nav-bubbles,.step .nav-check{display:none}
+.step.current .step-cauldron{filter:drop-shadow(0 0 5px #e4bd6a85)}
+.step.current .nav-bubbles{display:block}
+.step.current .nav-bubbles circle{animation:nav-bubble 2s ease-in-out infinite}
+.step.current .nav-bubbles circle:nth-child(2){animation-delay:.4s}
+.step.current .nav-bubbles circle:nth-child(3){animation-delay:.8s}
+.step.complete .nav-potion{fill:#a6c67a}
+.step.complete .nav-check{display:block}
+.step.locked .step-cauldron{filter:grayscale(1);opacity:.4}
+.potion-steps .step.locked>.step-label{opacity:.5}
+@keyframes nav-bubble{0%,100%{opacity:.3;transform:translateY(1px)}50%{opacity:1;transform:translateY(-3px)}}
+body:has(:is(.screen-game,.screen-brewing)) .lab-backdrop:after{background:linear-gradient(90deg,#29243145,#26203175 43%,#211d2abf 78%,#211d2a96)}
+/* Keep the existing character/floor frame while moving the title into the task. */
+:is(.screen-game,.screen-brewing){width:100%;max-width:1540px;min-height:0;height:100dvh;max-height:100dvh;padding:8px clamp(18px,2.2vw,36px) 14px;display:grid;grid-template-rows:calc(77.6px + clamp(28px,3.8dvh,36px) * 1.12) minmax(0,1fr)}
+:is(.screen-game,.screen-brewing) .potion-steps{height:64px;padding:0;border:0}
+.recipe-panel .round-heading{padding:0;text-align:left;text-shadow:0 2px 7px #19121e}
+.recipe-panel .round-heading h1{font-size:clamp(24px,2.9dvh,30px);line-height:1.2;margin:0}
+.potion-title{color:#e5bb7b}
+.recipe-panel .round-heading>p{font-size:17px;line-height:1.4;max-width:none;margin:0;color:#eee4dc}
+.recipe-panel .round-heading .question-count{font-size:13px;color:#cdbbbf;margin:10px 0 8px;letter-spacing:.4px}
+.round-selection .round-instruction{padding-top:10px}
+.game-layout{display:grid;grid-template-columns:minmax(0,44fr) minmax(0,56fr);gap:clamp(18px,2vw,30px);min-height:0;align-items:start}
+.game-layout>.workshop{position:relative;isolation:isolate;display:block;width:100%;height:100%;max-width:none;min-height:0;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none;overflow:visible}
+.game-layout>.workshop:after{display:none}
+.game-layout .witch-side{position:absolute;left:clamp(-29px,calc(-1.6vw - 5px),-17px);top:auto;bottom:clamp(18px,4dvh,48px);width:min(52.5%,calc((100dvh - 165px) * .6667));height:auto;aspect-ratio:2 / 3;transform:none;overflow:visible;mask-image:none}
+.game-layout .witch-art{width:100%;height:auto;max-width:none;margin:0;filter:drop-shadow(0 8px 8px #20142144)}
+.game-layout .witch-art>img{display:block;width:100%;height:auto;object-fit:contain;object-position:center bottom}
+.game-layout .pot-side{position:absolute;right:6px;bottom:clamp(0px,calc(4dvh - 18px),30px);width:clamp(260px,23.5vw,370px);height:auto;transform:none;isolation:isolate}
+.game-layout .pot-side:after{content:"";position:absolute;left:17%;bottom:.5%;width:66%;height:7%;border-radius:50%;background:radial-gradient(ellipse,#20131ad9,#20131a70 45%,transparent 74%);filter:blur(3px);transform:translateY(30%);z-index:-1;pointer-events:none}
+.game-layout .cauldron{width:100%;max-width:none;height:auto;aspect-ratio:245 / 220;margin:0;filter:drop-shadow(0 2px 2px #20142144)}
+.game-layout .cauldron>img{position:absolute;inset:0}
+.game-layout .steam{left:20%;top:0;width:60%;height:32%;opacity:.6}
+.game-layout .steam i{left:15%;width:18%;height:75%}
+.game-layout .steam i:nth-child(2){left:45%;height:100%}
+.game-layout .steam i:nth-child(3){left:70%}
+.game-layout .hearth{left:15%;width:70%;height:12%;bottom:-2%}
+.game-layout>.recipe-panel{position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;min-height:0;max-height:100%;height:auto;margin:clamp(12px,4dvh,42px) 0 0;padding:0;gap:12px;background:none;border:0;border-radius:0;box-shadow:none}
+.game-layout>.recipe-panel:before{content:"";position:absolute;inset:-25px -15px;background:radial-gradient(ellipse,#251e2a5c,transparent 74%);z-index:-1;pointer-events:none}
+.game-layout>.recipe-panel{gap:12px;max-width:700px}
+.recipe-content{min-width:0;min-height:0;flex:0 1 auto}
+.tray-label{font-size:11px;letter-spacing:1.1px;line-height:1.4;margin-bottom:10px;color:#e4d5c8;text-shadow:0 1px 4px #160e1b}
+.tray-label>span{color:#d0c3ce;font-size:12px}
+.word-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-height:0}
+.word-grid .word-card{min-width:0;font-size:clamp(23px,3.1dvh,28px);padding:10px 8px;min-height:50px}
+.game-layout .word-card{border:0;border-radius:0;background-color:transparent;box-shadow:none;filter:drop-shadow(0 3px 3px #170e204d)}
+.game-layout .word-card:hover:enabled{background-color:transparent;filter:drop-shadow(0 4px 5px #e9bb6c38)}
+.selected-zone{border:0;margin-top:14px;padding:0;min-height:0}
+.selected-zone .tray-label{margin-bottom:6px}
+.selected-words{gap:6px;min-height:28px}
+.selected-words .word-card{min-height:38px;font-size:20px;padding:6px 12px;gap:10px;background-color:transparent}
+.empty-note{font-size:15px;color:#d1c2ca}
+.game-layout .small-note,.game-layout .added-note,.game-layout .choose-label{display:none}
+.game-bottom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px 16px;min-height:0;padding:4px 0 0;border:0;margin:0;flex-shrink:0}
+.game-bottom .recipe-progress{width:auto;min-width:0;grid-column:1;grid-row:1}
+.recipe-progress>div:first-child{margin-bottom:7px;color:#ddd0d7}
+.recipe-panel>.feedback{text-align:left;min-height:20px;font-size:14px;line-height:20px;text-shadow:0 1px 4px #160e1b}
+.recipe-panel>.feedback:empty{display:block}
+.round-selection>.feedback:empty{display:none}
+.game-bottom .brew,.game-bottom .brew-hint{grid-column:2;grid-row:1}
+.game-bottom .brew-hint{font-size:14px;line-height:1.4;color:#e0cfcc}
+.game-bottom .brew{padding:14px 20px;min-height:52px;gap:15px;font-size:13px;color:#4d321d;border:1px solid #eac579;border-radius:13px;background:linear-gradient(#f6d58e,#e5b360);box-shadow:inset 0 1px #fff2caad,0 4px #966738,0 8px 16px #1d122b55;transition:transform .14s,box-shadow .2s,background .2s}
+.game-bottom .brew:hover:enabled{background:linear-gradient(#ffe2a1,#edbd6f);box-shadow:inset 0 1px #fff3ce,0 5px #966738,0 0 21px #f2c36e48;transform:none}
+.game-bottom .brew:active:enabled{transform:translateY(2px) scale(.985);box-shadow:0 1px #966738}
+.game-brew-icon{width:24px;height:24px;flex:none;fill:#fff0ba;stroke:#7e5325;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.question-label{margin-top:clamp(18px,4dvh,42px);font-size:20px;color:#dfcdd8;text-shadow:0 2px 5px #160e1b}
+.question-word{font-size:clamp(36px,5.5dvh,54px);margin:14px 0 25px;color:#f4e4c8;text-shadow:0 2px 8px #160e1b}
+.transformation{display:flex;align-items:baseline;justify-content:flex-start;gap:22px;margin:8px 0 16px;line-height:1.15}
+.transformation .question-word{font-size:clamp(42px,6.2dvh,62px);line-height:1.15;margin:0}
+.transformation-arrow,.question-mark{font-family:Georgia,serif;font-size:clamp(37px,5.5dvh,54px);color:#e3c794}
+.round-sequential .phrase-word{text-align:left;margin:8px 0 16px;line-height:1.2}
+.round-sequential .decision-buttons{justify-content:flex-start;margin:0}
+.round-sequential .answer-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.round-sequential .answer-cards .word-card{font-size:clamp(23px,3.3dvh,28px);padding:16px 8px;min-height:58px}
+.round-sequential .game-bottom{grid-template-columns:minmax(0,1fr);padding:0}
+.game-layout>.round-sequential{gap:8px}
+.round-sequential>.feedback{min-height:18px;line-height:18px}
+.round-sequential .game-bottom .brew{grid-column:1;grid-row:2;justify-self:start;margin-top:4px}
+.round-sequential .recipe-progress>div:first-child{justify-content:flex-start;gap:6px;font-size:14px;align-items:baseline}
+.round-sequential .recipe-progress strong,.round-sequential .recipe-progress small{font-size:14px;color:#e4d3bd;font-weight:normal}
+.recipe-ready{font-size:17px;line-height:1.5;color:#e1d3dc;margin:8px 0}
+.answer-cards{gap:10px;flex-wrap:nowrap}
+.answer-cards .word-card{font-size:clamp(23px,3.3dvh,30px);padding:20px 8px;min-width:0}
+.decision-buttons{margin:18px 0}
+.decision-buttons .secondary{background:#bba97324;border-color:#d3b77b75;box-shadow:0 3px 7px #170e2033;color:#f1dfb5}
+.ready{padding:clamp(26px,7dvh,75px) 10px}
+.ready p{color:#e1d3dc}
+.ingredient-arriving{opacity:0}
+body:has(:is(.screen-game,.screen-brewing)) .ingredient-flight{border:0;border-radius:0;background-color:transparent;box-shadow:none;filter:drop-shadow(0 3px 3px #170e204d)}
+.cauldron.ingredient-received:after{content:"";position:absolute;left:25%;top:17%;width:50%;height:12%;border:2px solid #c8d796b3;border-radius:50%;pointer-events:none;z-index:8;animation:ingredient-ripple .35s ease-out both}
+@keyframes ingredient-ripple{from{opacity:.9;transform:scale(.35)}to{opacity:0;transform:scale(1.15)}}
+@media(max-width:899px){
+  :is(.screen-game,.screen-brewing){min-height:100dvh;height:auto;max-height:none;padding:8px 14px 24px;grid-template-rows:64px auto}
+  .recipe-panel .round-heading h1{font-size:25px}
+  .game-layout{grid-template-columns:minmax(0,1fr);gap:14px}
+  .game-layout>.workshop{height:300px;max-width:540px;margin:0 auto}
+  .game-layout .witch-side{left:-9px;top:auto;bottom:0;width:52%;height:auto}
+  .game-layout .pot-side{right:6px;bottom:-12px;width:56%;max-width:270px}
+  .game-layout>.recipe-panel{margin:0;padding:0;min-height:0;max-height:none}
+  .game-layout>.recipe-panel:before{inset:-15px -8px}
+  .game-bottom{grid-template-columns:minmax(0,1fr);gap:12px}
+  .game-bottom .recipe-progress{grid-column:1;grid-row:1}
+  .game-bottom .feedback{grid-column:1;grid-row:2}
+  .game-bottom .brew,.game-bottom .brew-hint{grid-column:1;grid-row:3;width:100%;text-align:center}
+  .game-bottom .brew{min-height:54px}
+  .round-sequential .game-bottom .brew{grid-row:2;justify-self:stretch}
+  .transformation{gap:18px;margin:4px 0 14px}
+  .transformation .question-word{font-size:43px}
+  .word-grid .word-card{font-size:21px;min-height:50px;padding:8px 6px}
+  .selected-words .word-card{min-height:40px}
+  .answer-cards{flex-wrap:wrap}
+  .answer-cards .word-card{font-size:23px;min-width:100px}
+  .question-label{margin-top:15px}
+}
+@media(max-width:380px){.word-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.round-sequential .answer-cards{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:900px){.screen-final .final-screen{padding:20px 0 24px}}
+/* First potion only: a small parchment title and a slightly larger full figure. */
+:is(.screen-game,.screen-brewing)[data-round="1"] .witch-side{width:min(53.5%,calc((100dvh - 159px) * .6667));bottom:clamp(12px,calc(4dvh - 6px),42px)}
+.round-selection .parchment-heading,.goose-heading .parchment-heading{position:relative;width:fit-content;max-width:100%;padding:11px 48px 12px 17px;border:1px solid #bc945d;border-radius:11px;background:linear-gradient(145deg,#f7ead0,#ecdbb8);box-shadow:inset 0 1px #fff9e8b3,0 4px 12px #1c121f33;text-shadow:none}
+.parchment-heading .potion-kicker{display:block;margin-bottom:4px;font-size:11px;line-height:15px;letter-spacing:1.6px;color:#8a6139}
+.recipe-panel .parchment-heading h1{font-size:clamp(23px,3.2dvh,28px);line-height:1.2;color:#4c352f;text-shadow:none}
+.heading-spark{position:absolute;right:13px;top:50%;width:23px;height:23px;transform:translateY(-50%);fill:#d7ab60;stroke:#9b713e;stroke-width:.7;pointer-events:none}
+.round-selection .ingredient-help{justify-content:flex-end;margin-bottom:7px}
+.goose-title-slot{position:relative;height:calc(clamp(24px,2.9dvh,30px) * 1.2)}
+/* Grow the sign upward into the existing gap, keeping the question and answers fixed. */
+.goose-heading .parchment-heading{position:absolute;left:0;bottom:0;width:max-content}
+.goose-heading .parchment-heading h1{font-style:italic}
+.goose-heading .parchment-heading:before,.goose-heading .parchment-heading:after{content:"";position:absolute;width:10px;height:10px;border-color:#ad834d;border-style:solid;pointer-events:none}
+.goose-heading .parchment-heading:before{top:5px;left:5px;border-width:1px 0 0 1px;border-top-left-radius:4px}
+.goose-heading .parchment-heading:after{bottom:5px;right:5px;border-width:0 1px 1px 0;border-bottom-right-radius:4px}
+.goose-heading .small-spark{top:9px;right:9px;width:9px;height:9px;transform:none}
+@media(max-width:899px){.goose-title-slot{height:auto}.goose-heading .parchment-heading{position:relative;left:auto;bottom:auto;padding:10px 39px 11px 13px}}
+@media(max-width:899px){:is(.screen-game,.screen-brewing)[data-round="1"] .witch-side{width:53%;bottom:-4px}.round-selection .parchment-heading{padding:10px 39px 11px 13px}.recipe-panel .parchment-heading h1{font-size:23px}.heading-spark{right:10px;width:20px;height:20px}}
+@media(prefers-reduced-motion:reduce){.ingredient-arriving{opacity:1}.cauldron.ingredient-received:after{display:none}}

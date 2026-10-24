@@ -1,0 +1,77 @@
+/* The celebration is isolated from the start screen and the three learning rounds. */
+.screen-final{width:100%;max-width:1480px;height:100dvh;min-height:0;padding:16px clamp(18px,2.4vw,40px)}
+body:has(.screen-final) .lab-backdrop:after{background:linear-gradient(110deg,#29243150,#29243178 55%,#29243187)}
+.screen-final .final-screen{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;height:100%;min-height:0;padding:0;text-align:center}
+.final-heading h1{font-size:clamp(32px,5.3dvh,50px);line-height:1.12;color:#f3d290;margin:0;text-shadow:0 0 17px #edc57d45;animation:final-heading-arrive .65s ease-out 6.8s both,final-title-shimmer 4s ease-in-out 7.45s infinite}
+.final-heading p{font-size:clamp(16px,2.3dvh,20px);line-height:1.45;color:#f0e3d4;margin:8px 0 0;text-shadow:0 2px 8px #211624;animation:final-heading-arrive .65s ease-out 6.9s both}
+.final-scene{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,32fr) minmax(0,68fr);gap:12px;min-width:0;min-height:0;align-items:end}
+.screen-final .final-witch{position:relative;isolation:isolate;width:100%;max-width:430px;height:clamp(340px,58dvh,540px);max-height:100%;margin:0;z-index:1;animation:final-witch-arrive .65s ease-out both}
+.screen-final .final-witch:after{content:"";position:absolute;bottom:0;left:44%;width:24%;height:4%;border-radius:50%;background:radial-gradient(ellipse,#21131ac4,#21131a55 45%,transparent 74%);filter:blur(4px);z-index:-1;pointer-events:none}
+.screen-final .final-witch .witch-art{width:100%;height:100%;margin:0;transform:none;filter:drop-shadow(0 3px 3px #20142144)}
+.screen-final .final-witch .witch-art>img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.screen-final .final-potions{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.3vw,20px);align-self:center;margin:0;padding:0;min-width:0}
+.screen-final .final-potions article{position:relative;min-width:0;background:none;border:0;border-radius:0;box-shadow:none;padding:0;margin:0}
+.final-animal-stage{position:relative;isolation:isolate;width:100%;height:clamp(160px,28dvh,285px)}
+.final-animal-stage:after{content:"";position:absolute;left:16%;bottom:1%;width:68%;height:7%;background:radial-gradient(ellipse,#2014215e,transparent 72%);border-radius:50%;z-index:-1;pointer-events:none}
+.final-one,.final-many{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
+.final-one>img{position:absolute;left:12%;top:0;display:block;width:76%;height:100%;object-fit:contain}
+.screen-final .final-many .animal-group{position:absolute;inset:0;width:100%;height:100%;margin:0}
+.screen-final .final-many .animal-group>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.final-one{opacity:0;visibility:hidden;animation:final-single .8s ease-in-out var(--one-at) both}
+.final-many{animation:final-group .65s ease-out var(--group-at) both}
+.final-many .animal-group{filter:drop-shadow(0 0 9px #e1c77524);animation:final-result-glow 4s ease-in-out var(--after-at) infinite}
+.screen-final .final-potions .final-caption{width:fit-content;max-width:100%;margin:10px auto 0;padding:9px 12px;border:1px solid #bb915a;border-radius:9px;background:linear-gradient(145deg,#f6e7ca,#e9d5ae);color:#4a352e;font-family:Georgia,serif;font-size:clamp(18px,1.65vw,24px);line-height:1.3;box-shadow:inset 0 1px #fff8e2a8,0 3px 8px #2014212e;animation:final-group .6s ease-out var(--group-at) both}
+.screen-final .final-caption span{margin:0 3px;color:#89713f}
+.final-spell-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:0;pointer-events:none}
+.spell-trail{fill:none;stroke:#f0d18d;stroke-width:1.8;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;filter:drop-shadow(0 0 3px #e9c47766);animation:final-spell-trail 1s ease-out var(--trail-at) both}
+.final-wand-glow{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:radial-gradient(circle,#ffe7adad,#e9be5f44 30%,transparent 70%);pointer-events:none;z-index:3;animation:final-wand-light 1.5s ease-out .35s both,final-ambient-glow 4s ease-in-out 6.8s infinite}
+.final-wand-stars{fill:#f4d48b;pointer-events:none}
+.final-wand-stars>*{opacity:0;animation:final-wand-spark 1.8s ease-out .6s both,final-ambient-spark 4s ease-in-out 6.8s infinite}
+.final-wand-stars>:nth-child(2){animation-delay:.8s,7.6s}
+.final-wand-stars>:nth-child(3){animation-delay:1s,8.3s}
+.final-puff{position:absolute;left:14%;top:24%;width:72%;height:59%;border-radius:50%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 38% 60%,#a9bc826b,transparent 65%),radial-gradient(ellipse at 65% 40%,#a58ab66b,transparent 66%);filter:blur(7px);opacity:0;animation:final-smoke .9s ease-out var(--group-at) both}
+.final-bubbles{position:absolute;inset:0;z-index:3;pointer-events:none}
+.final-bubbles i{position:absolute;left:7%;top:66%;width:8px;height:8px;border:1px solid #dce7b3a3;border-radius:50%;opacity:0;animation:final-bubble .9s ease-out var(--group-at) both}
+.final-bubbles i:nth-child(2){left:89%;top:54%;width:6px;height:6px;animation-delay:calc(var(--group-at) + .12s)}
+.final-bubbles i:nth-child(3){left:79%;top:18%;width:5px;height:5px;animation-delay:calc(var(--group-at) + .2s)}
+.final-result-sparks{position:absolute;inset:0;width:100%;height:100%;fill:#f2d08a;pointer-events:none;z-index:3}
+.final-result-sparks>*{opacity:0;animation:final-result-spark .9s ease-out var(--group-at) both}
+.final-result-sparks>:last-child{animation:final-result-spark .9s ease-out var(--group-at) both,final-ambient-spark 4.5s ease-in-out var(--after-at) infinite}
+.final-controls{padding:8px 0 5px}
+.screen-final .final-replay{min-height:58px;padding:17px 30px;gap:22px;color:#4d321d;font-size:15px;letter-spacing:1.1px;border:1px solid #eac579;border-radius:13px;background:linear-gradient(#f6d58e,#e5b360);box-shadow:inset 0 1px #fff2caad,0 5px #966738,0 9px 18px #1d122b55;animation:final-control-arrive .45s ease-out 7s both}
+.screen-final .final-replay:hover:enabled{background:linear-gradient(#ffe2a1,#edbd6f);box-shadow:inset 0 1px #fff3ce,0 5px #966738,0 0 21px #f2c36e48;transform:none}
+.screen-final .final-replay:active:enabled{transform:translateY(2px) scale(.985);box-shadow:0 2px #966738}
+.final-button-star{width:25px;height:25px;fill:#fff0ba;stroke:#8e612f;stroke-width:1;pointer-events:none}
+@keyframes final-witch-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes final-wand-light{0%{opacity:0;transform:scale(.5)}40%,75%{opacity:1;transform:scale(1.08)}100%{opacity:.65;transform:scale(1)}}
+@keyframes final-wand-spark{0%{opacity:0;transform:translateY(5px)}35%{opacity:.9}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes final-spell-trail{0%{opacity:0;stroke-dashoffset:1}15%{opacity:.75}75%{opacity:.65;stroke-dashoffset:0}100%{opacity:0;stroke-dashoffset:0}}
+@keyframes final-single{0%{visibility:visible;opacity:0;transform:scale(.92)}20%,99.9%{visibility:visible;opacity:1;transform:none}100%{visibility:hidden;opacity:0;transform:none}}
+@keyframes final-group{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes final-smoke{0%{opacity:0;transform:scale(.6)}35%{opacity:.7}100%{opacity:0;transform:translateY(-15px) scale(1.1)}}
+@keyframes final-bubble{0%{opacity:0;transform:translateY(3px) scale(.6)}25%{opacity:.8}100%{opacity:0;transform:translateY(-21px) scale(1.1)}}
+@keyframes final-result-spark{0%{opacity:0;transform:translateY(3px)}35%{opacity:.9}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes final-heading-arrive{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes final-title-shimmer{0%,100%{text-shadow:0 0 12px #edc57d40}50%{text-shadow:0 0 23px #edc57d70}}
+@keyframes final-control-arrive{from{opacity:0;visibility:hidden;transform:translateY(4px)}to{opacity:1;visibility:visible;transform:none}}
+@keyframes final-result-glow{0%,100%{filter:drop-shadow(0 0 7px #e1c77518)}50%{filter:drop-shadow(0 0 12px #e1c77540)}}
+@keyframes final-ambient-glow{0%,100%{opacity:.5}50%{opacity:.85}}
+@keyframes final-ambient-spark{0%,100%{opacity:.12}50%{opacity:.65}}
+@media(max-width:760px){
+  .screen-final{padding:14px 12px}
+  .final-heading h1{font-size:30px}
+  .final-heading p{font-size:16px;line-height:1.4;margin-top:7px}
+  .final-scene{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:8px}
+  .screen-final .final-witch{height:clamp(230px,36dvh,320px);width:100%;max-width:320px;justify-self:center}
+  .screen-final .final-potions{gap:7px;align-self:end}
+  .final-animal-stage{height:clamp(95px,15dvh,130px)}
+  .screen-final .final-potions .final-caption{font-size:16px;padding:7px 5px;margin-top:5px;line-height:1.3}
+  .screen-final .final-caption span{margin:0 1px}
+  .final-controls{padding-top:5px}
+  .screen-final .final-replay{min-height:54px;padding:15px 26px}
+}
+@media(prefers-reduced-motion:reduce){
+  .screen-final .final-one{display:none;visibility:hidden;opacity:0}
+  .screen-final .final-many,.screen-final .final-caption,.screen-final .final-heading h1,.screen-final .final-heading p,.screen-final .final-replay,.screen-final .final-witch{opacity:1;visibility:visible;transform:none}
+  .final-spell-lines,.final-wand-glow,.final-puff,.final-bubbles,.final-result-sparks{display:none}
+}
