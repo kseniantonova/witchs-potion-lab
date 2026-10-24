@@ -1,6 +1,6 @@
 # Witch’s Potion Lab artwork
 
-Place the supplied PNGs in this folder. The game detects them on page load and replaces its CSS artwork automatically. No code changes are needed. Reload the page after adding files.
+The supplied PNGs in this folder are required game artwork. Characters, cauldrons and animals render directly from these originals; no substitute CSS drawings appear during loading.
 
 | File | Use |
 | --- | --- |
