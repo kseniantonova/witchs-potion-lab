@@ -63,6 +63,7 @@ with sync_playwright() as p:
         page.wait_for_function('Number(getComputedStyle(document.querySelector(".failed-smoke")).opacity)>.75')
         page.screenshot(path=str(OUT/f'{width}-poof.png'),full_page=True)
         expect(page.locator('.failure-notice')).to_have_text(MESSAGE)
+        page.wait_for_function('getComputedStyle(document.querySelector(".failed-liquid")).fill === "rgb(130, 100, 135)"')
         assert page.locator('.failed-liquid').evaluate('(e)=>getComputedStyle(e).fill') == 'rgb(130, 100, 135)'
         page.screenshot(path=str(OUT/f'{width}-purple.png'),full_page=True)
         assert page.locator('.pot-side').evaluate(position) == layout

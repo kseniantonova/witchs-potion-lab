@@ -1,5 +1,7 @@
 /* The introduction is one room, without a separate illustration panel.
    Every rule is scoped to the start screen; round layout remains unchanged. */
+.art-loading .lab-backdrop,.art-loading .start-figures{visibility:hidden}
+.screen-start .art-load-error{margin-top:14px;max-width:365px;font-size:15px;line-height:1.4;color:#f2d8b4}
 .screen-start{width:100%;max-width:none;height:100dvh;min-height:0;padding:0}
 body:has(.screen-start) .lab-backdrop:after{background:linear-gradient(90deg,#211c2ee8 0%,#262031d4 32%,#29243155 63%,#29243124 100%)}
 .screen-start .start-scene{position:relative;isolation:isolate;width:100%;height:100%;min-height:0;padding:clamp(24px,5vw,88px);display:flex;align-items:center}

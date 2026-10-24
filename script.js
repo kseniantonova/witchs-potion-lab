@@ -6,6 +6,7 @@
   const assets = new Set();
   const assetNames = ['lab-background', 'witch-neutral', 'witch-happy', 'cauldron-normal', 'cauldron-bubbling', 'ingredient-tile', 'mouse-one', 'mice-five', 'goose-one', 'geese-four', 'sheep-one', 'sheep-six'];
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let artworkReady = false;
   let state;
   let timers = [];
   const arrivingWords = new Map();
@@ -144,7 +145,7 @@
       void newBar.offsetWidth;
       requestAnimationFrame(() => { if (newBar.isConnected) newBar.style.width = targetFill; });
     }
-    root.querySelectorAll('button').forEach(b => { if (state.busy) b.disabled = true; });
+    root.querySelectorAll('button').forEach(b => { if (state.busy || !artworkReady) b.disabled = true; });
     if (state.screen === 'final') requestAnimationFrame(layoutFinalMagic);
     if (focusHeading) { const h = root.querySelector('h1'); h.tabIndex = -1; h.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
   }
@@ -275,18 +276,36 @@
   root.addEventListener('drop', e => { if (!e.target.closest('[data-drop]')) return; e.preventDefault(); const word = e.dataTransfer.getData('text/plain'); if (!state.selected.has(word)) select(word); });
   reset();
   window.addEventListener('resize', layoutFinalMagic, { passive: true });
-  // Preload the supplied PNGs; illustrated characters always use the originals.
-  Promise.all(assetNames.map(name => new Promise(resolve => {
-    const img = new Image(); img.onload = () => { assets.add(name); resolve(); }; img.onerror = resolve; img.src = `${assetRoot}${name}.png`;
-  }))).then(() => {
-    if (assets.has('lab-background')) {
-      document.querySelector('.lab-backdrop').style.backgroundImage = `url("${assetRoot}lab-background.png")`;
-      document.documentElement.classList.add('has-lab-art');
+  // Show the room and its figures together, without waiting for later-round artwork.
+  const criticalArtwork = ['lab-background', 'witch-neutral', 'cauldron-normal', 'ingredient-tile'];
+  async function preloadArtwork(name) {
+    const img = new Image();
+    img.fetchPriority = name === 'lab-background' ? 'high' : 'auto';
+    const loaded = await new Promise(resolve => {
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = `${assetRoot}${name}.png`;
+    });
+    if (!loaded) return false;
+    try { await img.decode(); } catch { return false; }
+    assets.add(name);
+    return true;
+  }
+  Promise.all(criticalArtwork.map(preloadArtwork)).then(loaded => {
+    if (loaded.some(ok => !ok)) {
+      const notice = document.createElement('p');
+      notice.className = 'art-load-error'; notice.setAttribute('role', 'alert');
+      notice.textContent = 'The artwork could not load. Please refresh to try again.';
+      root.querySelector('.start-intro').append(notice);
+      return;
     }
-    if (assets.has('ingredient-tile')) {
-      document.documentElement.style.setProperty('--tile-image', `url("${assetRoot}ingredient-tile.png")`);
-      document.documentElement.classList.add('has-ingredient-art');
-    }
-    render();
+    document.querySelector('.lab-backdrop').style.backgroundImage = `url("${assetRoot}lab-background.png")`;
+    document.documentElement.style.setProperty('--tile-image', `url("${assetRoot}ingredient-tile.png")`);
+    document.documentElement.classList.add('has-lab-art', 'has-ingredient-art');
+    artworkReady = true;
+    document.documentElement.classList.remove('art-loading');
+    root.querySelectorAll('button').forEach(button => { button.disabled = state.busy; });
+    // These PNGs do not delay the start screen or re-render a round mid-animation.
+    assetNames.filter(name => !criticalArtwork.includes(name)).forEach(preloadArtwork);
   });
 })();
